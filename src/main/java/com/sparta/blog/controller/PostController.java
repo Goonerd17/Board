@@ -16,18 +16,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostController {
 
-
     private final PostService postService;
 
     @GetMapping
     public List<PostResponseDto> readAllPosts() {return postService.getPosts();}
 
-
     @GetMapping("/{postId}")
     public PostResponseDto readOnePost(@PathVariable Long postId) {
         return postService.findResponsePostDto(postId);
     }
-
 
     @PostMapping
     public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {

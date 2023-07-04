@@ -19,7 +19,6 @@ import java.io.IOException;
 @Slf4j
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final JwtUtil jwtUtil;
-
     public JwtAuthenticationFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
         setFilterProcessesUrl("/api/user/login");
@@ -51,9 +50,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         UserRoleEnum role = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getRole();
 
         String token = jwtUtil.createToken(username, role);
-
-//      쿠키 방식 : jwtUtil.addJwtToCookie(token, response);
-
         jwtUtil.addJwtHeader(token,response);
         response.getWriter().write("msg : login success");
         response.setStatus(200);

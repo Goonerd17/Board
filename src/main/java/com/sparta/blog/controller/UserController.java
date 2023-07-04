@@ -28,7 +28,6 @@ public class UserController {
         return "home";
     }
 
-
     @PostMapping("/signup")
     public ResponseEntity<String> sign(@RequestBody @Valid SignupRequestDto signupRequestDto, BindingResult bindingResult) {
 
@@ -42,6 +41,5 @@ public class UserController {
         String message = userService.signup(signupRequestDto);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
-
 }
 

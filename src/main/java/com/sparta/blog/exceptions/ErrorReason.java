@@ -18,10 +18,9 @@ public class ErrorReason {
         this.message = message;
     }
 
-    public ErrorReason(ErrorCode errorCode) {
-        this.status = errorCode.getStatus();
-        this.code = errorCode.getCode();
-        this.message = errorCode.getMessage();
+    public ErrorReason(ErrorCodeEnum errorCodeEnum) {
+        this.status = errorCodeEnum.getStatus();
+        this.code = errorCodeEnum.getCode();
+        this.message = errorCodeEnum.getMessage();
     }
-
 }
