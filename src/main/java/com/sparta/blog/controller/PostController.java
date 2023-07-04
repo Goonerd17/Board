@@ -2,8 +2,10 @@ package com.sparta.blog.controller;
 
 import com.sparta.blog.dto.PostRequestDto;
 import com.sparta.blog.dto.PostResponseDto;
+import com.sparta.blog.security.UserDetailsImpl;
 import com.sparta.blog.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -28,18 +30,17 @@ public class PostController {
 
 
     @PostMapping("/post")
-    public String createPost(@RequestBody PostRequestDto postRequestDto) {
-        return postService.createPost(postRequestDto);
+    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+        return postService.createPost(postRequestDto, userDetailsImpl.getUser());
     }
 
-
     @PatchMapping("/post/{postId}")
-    public String updatePost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto) {
-        return postService.updatePost(postId, postRequestDto);
+    public PostResponseDto updatePost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+        return postService.updatePost(postId, postRequestDto, userDetailsImpl.getUser());
     }
 
     @DeleteMapping ("/post/{postId}")
-    public String deletePost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto) {
-        return postService.deletePost(postId, postRequestDto.getPassword());
+    public String deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+        return postService.deletePost(postId, userDetailsImpl.getUser());
     }
 }

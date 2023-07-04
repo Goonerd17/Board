@@ -43,10 +43,32 @@ public class JwtUtil {
 
 
     // header 토큰을 가져오기
-    public String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
-            return bearerToken.substring(7);
+    public String substringHeaderToken(String token) {
+        if (StringUtils.hasText(token) && token.startsWith(BEARER_PREFIX)) { return token.substring(7);}
+        throw new NullPointerException("유효한 토큰이 아닙니다");
+    }
+
+    // header 토큰 담기
+    public void addJwtHeader(String token, HttpServletResponse response) {
+        try {
+            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20");
+            response.setHeader(AUTHORIZATION_HEADER, token);
+        } catch (UnsupportedEncodingException e) {
+            log.info(e.getMessage());
+        }
+    }
+
+
+    // HttpServletRequest 에서 Header 안에 있는 토큰 decode
+    public String getTokenFromHeader(HttpServletRequest req) {
+        String token = req.getHeader(AUTHORIZATION_HEADER);
+        if(token != null) {
+            try {
+                return URLDecoder.decode(token, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                log.info(e.getMessage());
+                return null;
+            }
         }
         return null;
     }
@@ -64,29 +86,6 @@ public class JwtUtil {
                         .signWith(key, signatureAlgorithm)
                         .compact();
     }
-
-    // JWT Cookie 에 저장
-    public void addJwtToCookie(String token, HttpServletResponse res) {
-        try {
-            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20"); // Cookie Value 에는 공백이 불가능해서 encoding 진행
-
-            Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value
-            cookie.setPath("/");
-
-            // Response 객체에 Cookie 추가
-            res.addCookie(cookie);
-        } catch (UnsupportedEncodingException e) {
-        }
-    }
-
-    // JWT 토큰 substring
-    public String substringToken(String tokenValue) {
-        if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
-            return tokenValue.substring(7);
-        }
-        throw new NullPointerException("Not Found Token");
-    }
-
 
     // 토큰 검증
     public boolean validateToken(String token) {
@@ -111,6 +110,34 @@ public class JwtUtil {
     }
 
 
+
+
+    //////// 쿠키 저장 방식 ////////
+
+    // JWT Cookie 에 저장
+    public void addJwtToCookie(String token, HttpServletResponse res) {
+        try {
+            token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20"); // Cookie Value 에는 공백이 불가능해서 encoding 진행
+
+            Cookie cookie = new Cookie(AUTHORIZATION_HEADER, token); // Name-Value
+            cookie.setPath("/");
+
+            // Response 객체에 Cookie 추가
+            res.addCookie(cookie);
+        } catch (UnsupportedEncodingException e) {
+        }
+    }
+
+    // JWT 토큰 substring
+    public String substringToken(String tokenValue) {
+        if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
+            return tokenValue.substring(7);
+        }
+        throw new NullPointerException("Not Found Token");
+    }
+
+
+
     // HttpServletRequest 에서 Cookie Value : JWT 가져오기
     public String getTokenFromRequest(HttpServletRequest req) {
         Cookie[] cookies = req.getCookies();
@@ -127,6 +154,7 @@ public class JwtUtil {
         }
         return null;
     }
+
 }
 
 

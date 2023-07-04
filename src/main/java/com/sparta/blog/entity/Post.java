@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @NoArgsConstructor
@@ -19,25 +17,27 @@ public class Post extends Timestamped {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "author", nullable = false)
-    private String author;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "password", nullable = false)
-    private Long password;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Post(PostRequestDto postRequestDto) {
+
+
+    public Post(PostRequestDto postRequestDto, User user) {
         this.title = postRequestDto.getTitle();
-        this.author = postRequestDto.getAuthor();
+        this.username = user.getUsername();
         this.description = postRequestDto.getDescription();
-        this.password = postRequestDto.getPassword();
+        this.user = user;
     }
 
     public void update(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
         this.description = postRequestDto.getDescription();
-        this.password = postRequestDto.getPassword();
     }
 }

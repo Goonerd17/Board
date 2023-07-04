@@ -1,11 +1,13 @@
 package com.sparta.blog.jwt;
 
+import com.sparta.blog.exceptions.InvalidTokenException;
 import com.sparta.blog.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,29 +20,29 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Slf4j(topic = "JWT 검증 및 인가")
+@RequiredArgsConstructor
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
 
-    public JwtAuthorizationFilter(JwtUtil jwtUtil, UserDetailsServiceImpl userDetailsService) {
-        this.jwtUtil = jwtUtil;
-        this.userDetailsService = userDetailsService;
-    }
-
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
 
-        String tokenValue = jwtUtil.getTokenFromRequest(req);
+//        쿠키 방식 : String tokenValue = jwtUtil.getTokenFromRequest(req);
+
+        String tokenValue = jwtUtil.getTokenFromHeader(req);
 
         if (StringUtils.hasText(tokenValue)) {
+
             // JWT 토큰 substring
-            tokenValue = jwtUtil.substringToken(tokenValue);
-            log.info(tokenValue);
+//           쿠키 방식 : tokenValue = jwtUtil.substringToken(tokenValue);
+
+            tokenValue =jwtUtil.substringHeaderToken(tokenValue);
 
             if (!jwtUtil.validateToken(tokenValue)) {
                 log.error("Token Error");
-                return;
+                throw new InvalidTokenException("유효하지 않은 토큰입니다");
             }
 
             Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
