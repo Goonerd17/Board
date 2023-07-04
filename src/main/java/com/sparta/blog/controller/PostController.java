@@ -12,34 +12,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/post")
 @RequiredArgsConstructor
 public class PostController {
 
 
     private final PostService postService;
 
-    @GetMapping("/posts")
+    @GetMapping
     public List<PostResponseDto> readAllPosts() {return postService.getPosts();}
 
 
-    @GetMapping("/post/{postId}")
+    @GetMapping("/{postId}")
     public PostResponseDto readOnePost(@PathVariable Long postId) {
         return postService.findResponsePostDto(postId);
     }
 
 
-    @PostMapping("/post")
+    @PostMapping
     public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         return postService.createPost(postRequestDto, userDetailsImpl.getUser());
     }
 
-    @PatchMapping("/post/{postId}")
+    @PatchMapping("/{postId}")
     public PostResponseDto updatePost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         return postService.updatePost(postId, postRequestDto, userDetailsImpl.getUser());
     }
 
-    @DeleteMapping ("/post/{postId}")
+    @DeleteMapping ("/{postId}")
     public String deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         return postService.deletePost(postId, userDetailsImpl.getUser());
     }

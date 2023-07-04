@@ -1,6 +1,5 @@
 package com.sparta.blog.jwt;
 
-import com.sparta.blog.exceptions.InvalidTokenException;
 import com.sparta.blog.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -42,7 +41,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
             if (!jwtUtil.validateToken(tokenValue)) {
                 log.error("Token Error");
-                throw new InvalidTokenException("유효하지 않은 토큰입니다");
             }
 
             Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
