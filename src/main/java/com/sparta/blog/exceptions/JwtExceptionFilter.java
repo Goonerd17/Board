@@ -21,7 +21,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
         } catch (ExpiredJwtException e) {
             setErrorResponse(response, ErrorCodeEnum.TOKEN_EXPIRED);
         } catch (JwtException | IllegalArgumentException e) {
-            setErrorResponse(response, ErrorCodeEnum.TOKEN_iNVALID);
+            setErrorResponse(response, ErrorCodeEnum.TOKEN_INVALID);
         }
     }
 

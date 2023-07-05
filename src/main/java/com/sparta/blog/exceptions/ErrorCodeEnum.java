@@ -8,7 +8,7 @@ import static org.springframework.http.HttpStatus.*;
 @Getter
 public enum ErrorCodeEnum {
 
-    TOKEN_iNVALID(BAD_REQUEST, "400", "유효한 토큰이 아닙니다."),
+    TOKEN_INVALID(BAD_REQUEST, "400", "유효한 토큰이 아닙니다."),
     TOKEN_EXPIRED(BAD_REQUEST, "400", "토큰이 만료되었습니다");
 
     private final HttpStatus status;
