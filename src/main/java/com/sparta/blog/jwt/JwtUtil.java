@@ -41,13 +41,13 @@ public class JwtUtil {
         key = Keys.hmacShaKeyFor(bytes);
     }
 
-    // header 토큰을 가져오기
+    // Header 토큰을 가져오기
     public String substringHeaderToken(String token) {
         if (StringUtils.hasText(token) && token.startsWith(BEARER_PREFIX)) { return token.substring(7);}
         throw new NullPointerException("유효한 토큰이 아닙니다");
     }
 
-    // header 토큰 담기
+    // Header 토큰 담기
     public void addJwtHeader(String token, HttpServletResponse response) {
         try {
             token = URLEncoder.encode(token, "utf-8").replaceAll("\\+", "%20");
@@ -57,7 +57,7 @@ public class JwtUtil {
         }
     }
 
-    // HttpServletRequest 에서 Header 안에 있는 토큰 decode
+    // Header 안에 있는 토큰 decode
     public String getTokenFromHeader(HttpServletRequest req) {
         String token = req.getHeader(AUTHORIZATION_HEADER);
         if(token != null) {
