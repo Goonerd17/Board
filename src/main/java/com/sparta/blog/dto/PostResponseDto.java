@@ -1,13 +1,14 @@
 package com.sparta.blog.dto;
 
+import com.sparta.blog.entity.Comment;
 import com.sparta.blog.entity.Post;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
-@NoArgsConstructor
 public class PostResponseDto {
 
     private Long id;
@@ -16,6 +17,7 @@ public class PostResponseDto {
     private String description;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private List<CommentResponseDto> commentList;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
@@ -24,5 +26,8 @@ public class PostResponseDto {
         this.description = post.getDescription();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
+        this.commentList = post.getCommentList().stream()
+                .map(CommentResponseDto::new)
+                .collect(Collectors.toList());
     }
 }

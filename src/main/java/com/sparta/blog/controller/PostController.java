@@ -23,7 +23,7 @@ public class PostController {
 
     @GetMapping("/{postId}")
     public PostResponseDto readOnePost(@PathVariable Long postId) {
-        return postService.findResponsePostDto(postId);
+        return postService.getSinglePost(postId);
     }
 
     @PostMapping
