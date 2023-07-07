@@ -18,7 +18,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private static final String ADMIN_TOKEN = "암호화과정이 필요하지 않을까?";
+    private static final String ADMIN_TOKEN = "ASDdsfkjfigdajdaejifalkdjfDFDAK";
 
     // 회원가입
     public String signup(SignupRequestDto signupRequestDto) {

@@ -39,13 +39,13 @@ public class Comment extends Timestamped {
     }
 
     public Comment authorizationUpdateComment (CommentRequestDto commentRequestDto, User user) {
-        if (user.getId() != this.getUser().getId()) throw new IllegalArgumentException("해당 댓글 작성자만 수정할 수 있습니다");
+        if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 댓글 작성자혹은 관리자만 수정할 수 있습니다");
         this.update(commentRequestDto);
         return this;
     }
 
     public Comment authorizationDeleteComment (User user) {
-        if (user.getId() != this.getUser().getId()) throw new IllegalArgumentException("해당 댓글 작성자만 삭제할 수 있습니다");
+        if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 댓글 작성자혹은 관리자만 삭제할 수 있습니다");
         return this;
     }
 }
