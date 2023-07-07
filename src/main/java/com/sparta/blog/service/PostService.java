@@ -27,7 +27,7 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public PostList getPosts() {
-        List<PostResponseDto> collect = postRepository.findAllByOrderByModifiedAtDesc().stream()
+        List<PostResponseDto> collect = postRepository.findAllByOrderByCreatedAtAtDesc().stream()
                 .map(PostResponseDto::new)
                 .collect(Collectors.toList());
         return new PostList(collect);

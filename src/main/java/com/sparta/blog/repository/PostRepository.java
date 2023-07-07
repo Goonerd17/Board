@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query("select distinct p from Post p join fetch p.commentList cl order by cl.id desc")
-    List<Post> findAllByOrderByModifiedAtDesc();
+    @Query("select distinct p from Post p left join fetch p.commentList cl order by p.createdAt desc, cl.createdAt desc")
+    List<Post> findAllByOrderByCreatedAtAtDesc();
 
 }

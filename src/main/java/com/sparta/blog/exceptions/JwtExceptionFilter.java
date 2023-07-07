@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class JwtExceptionFilter extends OncePerRequestFilter {
     @Override
@@ -20,7 +21,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (ExpiredJwtException e) {
             setErrorResponse(response, ErrorCodeEnum.TOKEN_EXPIRED);
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (JwtException | IllegalArgumentException | NullPointerException | UnsupportedEncodingException e) {
             setErrorResponse(response, ErrorCodeEnum.TOKEN_INVALID);
         }
     }
