@@ -14,7 +14,7 @@ import java.util.List;
 @ControllerAdvice
 public class ExceptionController {
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorReason> illegalExHandle(IllegalArgumentException ie) {
+    public ResponseEntity<ErrorReason> handleIllegalArgsException(IllegalArgumentException ie) {
         ErrorReason errorReason = new ErrorReason(HttpStatus.BAD_REQUEST, "400", ie.getMessage());
         return ResponseEntity.status(errorReason.getStatus()).body(errorReason);
     }
@@ -24,11 +24,10 @@ public class ExceptionController {
         BindingResult bindingResult = me.getBindingResult();
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
 
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder validMessage = new StringBuilder();
         for (FieldError fieldError : fieldErrors) {
-            stringBuilder.append(fieldError.getDefaultMessage());
-            stringBuilder.append(" ");
+            validMessage.append(fieldError.getDefaultMessage());
         }
-        return ResponseEntity.badRequest().body(stringBuilder.toString());
+        return ResponseEntity.badRequest().body(validMessage.toString());
     }
 }
