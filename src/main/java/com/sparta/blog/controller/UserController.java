@@ -43,7 +43,7 @@ public class UserController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    @PostMapping("/signup/secureAdmin")
+    @PostMapping("/signup/secureadmin")
     public ResponseEntity<String> signupAdmin(@RequestBody @Valid SignupRequestDto signupRequestDto, BindingResult bindingResult) {
 
         List<FieldError> fieldErrors = bindingResult.getFieldErrors();
