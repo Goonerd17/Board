@@ -25,17 +25,21 @@ public class PostController {
     }
 
     @PostMapping
-    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto,
+                                      @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         return postService.createPost(postRequestDto, userDetailsImpl.getUser());
     }
 
     @PatchMapping("/{postId}")
-    public PostResponseDto modifyPost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+    public PostResponseDto modifyPost(@PathVariable Long postId,
+                                      @RequestBody PostRequestDto postRequestDto,
+                                      @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         return postService.updatePost(postId, postRequestDto, userDetailsImpl.getUser());
     }
 
     @DeleteMapping ("/{postId}")
-    public String removePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
+    public String removePost(@PathVariable Long postId,
+                             @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
         return postService.deletePost(postId, userDetailsImpl.getUser());
     }
 }
