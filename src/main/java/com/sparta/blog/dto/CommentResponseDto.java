@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class CommentResponseDto implements Comparable <CommentResponseDto> {
+public class CommentResponseDto{
 
     private Long id;
     private String content;
@@ -20,10 +20,5 @@ public class CommentResponseDto implements Comparable <CommentResponseDto> {
         this.username = comment.getUsername();
         this.createdAt = comment.getCreatedAt();
         this.modifiedAt = comment.getModifiedAt();
-    }
-
-    @Override
-    public int compareTo(CommentResponseDto o) {
-        return this.createdAt.compareTo(o.getCreatedAt());
     }
 }

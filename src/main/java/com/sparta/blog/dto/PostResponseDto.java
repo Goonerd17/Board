@@ -28,7 +28,6 @@ public class PostResponseDto {
         this.modifiedAt = post.getModifiedAt();
         this.commentList = post.getCommentList().stream()
                 .map(CommentResponseDto::new)
-                .sorted(Collections.reverseOrder())
                 .collect(Collectors.toList());
     }
 }
