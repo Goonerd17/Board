@@ -1,5 +1,6 @@
 package com.sparta.blog.service;
 
+import com.sparta.blog.dto.PostList;
 import com.sparta.blog.dto.PostRequestDto;
 import com.sparta.blog.dto.PostResponseDto;
 import com.sparta.blog.entity.Post;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -24,8 +26,9 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public List<PostResponseDto> getPosts() {
-        return postRepository.findAllByOrderByModifiedAtDesc().stream().map(PostResponseDto::new).toList();
+    public PostList getPosts() {
+        List<PostResponseDto> collect = postRepository.findAllByOrderByModifiedAtDesc().stream().map(PostResponseDto::new).collect(Collectors.toList());
+        return new PostList(collect);
     }
 
     @Transactional(readOnly = true)

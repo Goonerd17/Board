@@ -1,5 +1,6 @@
 package com.sparta.blog.controller;
 
+import com.sparta.blog.dto.PostList;
 import com.sparta.blog.dto.PostRequestDto;
 import com.sparta.blog.dto.PostResponseDto;
 import com.sparta.blog.security.UserDetailsImpl;
@@ -7,8 +8,6 @@ import com.sparta.blog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/post")
@@ -18,7 +17,7 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public List<PostResponseDto> readAllPosts() {return postService.getPosts();}
+    public PostList readAllPosts() {return postService.getPosts();}
 
     @GetMapping("/{postId}")
     public PostResponseDto readOnePost(@PathVariable Long postId) {
