@@ -18,7 +18,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private static final String ADMIN_TOKEN = "AAABnvxRVklrnYxKZ0aHgTBcXukeZygoC";
+    private static final String ADMIN_TOKEN = "암호화과정이 필요하지 않을까?";
 
     // 회원가입
     public String signup(SignupRequestDto signupRequestDto) {
@@ -31,7 +31,6 @@ public class UserService {
         // 사용자 ROLE 확인 (관리자인 경우, ADMIN / 사옹자인 경우, USER 부여)
         UserRoleEnum role = getUserRoleEnum(signupRequestDto);
 
-        //DTO -> ENTITY signUpRequestDto -> USER
         User user = new User(username, password, role);
         userRepository.save(user);
 

@@ -1,10 +1,10 @@
 package com.sparta.blog.dto;
 
-import com.sparta.blog.entity.Comment;
 import com.sparta.blog.entity.Post;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +28,7 @@ public class PostResponseDto {
         this.modifiedAt = post.getModifiedAt();
         this.commentList = post.getCommentList().stream()
                 .map(CommentResponseDto::new)
+                .sorted(Collections.reverseOrder())
                 .collect(Collectors.toList());
     }
 }

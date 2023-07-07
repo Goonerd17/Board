@@ -26,7 +26,7 @@ public class Post extends Timestamped {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -45,8 +45,19 @@ public class Post extends Timestamped {
         this.user = user;
     }
 
-    public void update(PostRequestDto postRequestDto) {
+    private void update(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
         this.description = postRequestDto.getDescription();
+    }
+
+    public Post authorizationUpdatePost(PostRequestDto postRequestDto, User user) {
+        if (user.getId() != this.getUser().getId()) throw new IllegalArgumentException("해당 게시글 작성자만 수정할 수 있습니다");
+        this.update(postRequestDto);
+        return this;
+    }
+
+    public Post authorizationDeletePost(User user) {
+        if (user.getId() != this.getUser().getId()) throw new IllegalArgumentException("해당 게시글 작성자만 삭제할 수 있습니다");
+        return this;
     }
 }

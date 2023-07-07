@@ -1,14 +1,12 @@
 package com.sparta.blog.dto;
 
 import com.sparta.blog.entity.Comment;
-import com.sparta.blog.entity.Post;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class CommentResponseDto {
+public class CommentResponseDto implements Comparable <CommentResponseDto> {
 
     private Long id;
     private String content;
@@ -22,5 +20,10 @@ public class CommentResponseDto {
         this.username = comment.getUsername();
         this.createdAt = comment.getCreatedAt();
         this.modifiedAt = comment.getModifiedAt();
+    }
+
+    @Override
+    public int compareTo(CommentResponseDto o) {
+        return this.createdAt.compareTo(o.getCreatedAt());
     }
 }

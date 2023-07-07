@@ -30,11 +30,22 @@ public class Comment extends Timestamped {
         this.user = user;
     }
 
-    public void update(CommentRequestDto commentRequestDto) {
+    private void update(CommentRequestDto commentRequestDto) {
         this.content = commentRequestDto.getContent();
     }
 
     void setPost(Post post) {
         this.post = post;
+    }
+
+    public Comment authorizationUpdateComment (CommentRequestDto commentRequestDto, User user) {
+        if (user.getId() != this.getUser().getId()) throw new IllegalArgumentException("해당 댓글 작성자만 수정할 수 있습니다");
+        this.update(commentRequestDto);
+        return this;
+    }
+
+    public Comment authorizationDeleteComment (User user) {
+        if (user.getId() != this.getUser().getId()) throw new IllegalArgumentException("해당 댓글 작성자만 삭제할 수 있습니다");
+        return this;
     }
 }
