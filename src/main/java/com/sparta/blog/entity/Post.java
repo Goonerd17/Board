@@ -8,9 +8,11 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lombok.AccessLevel.*;
+
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = PROTECTED)
 public class Post extends Timestamped {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

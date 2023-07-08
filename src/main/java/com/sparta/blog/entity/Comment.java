@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import static lombok.AccessLevel.*;
+
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = PROTECTED)
 @Getter
 public class Comment extends Timestamped {
 
