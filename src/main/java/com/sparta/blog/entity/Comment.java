@@ -45,7 +45,7 @@ public class Comment extends Timestamped {
         return this;
     }
 
-    public Comment removeComment(User user) {
+    public Comment checkDeleteableComment(User user) {
         if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 댓글 작성자 혹은 관리자만 삭제할 수 있습니다");
         return this;
     }

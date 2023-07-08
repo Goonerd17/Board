@@ -56,7 +56,7 @@ public class Post extends Timestamped {
         return this;
     }
 
-    public Post removePost(User user) {
+    public Post checkDeleteablePost(User user) {
         if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 게시글 작성자 혹은 관리자만 삭제할 수 있습니다");
         return this;
     }

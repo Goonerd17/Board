@@ -17,7 +17,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final PostService postService;
 
-    // 경로변수로 넘어온 postId를 이용해서만 해당 Post를 찾고 comment 삽입. 다른 방법을 통해 Post를 가져올 수 있는 것은 없는지 고민해볼것
     public CommentResponseDto createComment(Long postId, CommentRequestDto commentRequestDto, User user) {
         Comment comment = new Comment(commentRequestDto, user);
         postService.findPost(postId).addComment(comment);
@@ -31,7 +30,7 @@ public class CommentService {
     }
 
     public String deleteComment(Long commentId, User user) {
-        Comment comment = findComment(commentId).removeComment(user);
+        Comment comment = findComment(commentId).checkDeleteableComment(user);
         commentRepository.delete(comment);
         return "삭제완료";
     }

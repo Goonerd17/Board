@@ -20,7 +20,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private static final String ADMIN_TOKEN = "ASDdsfkjfigdajdaejifalkdjfDFDAK";
 
-    // 회원가입
     public String signup(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());

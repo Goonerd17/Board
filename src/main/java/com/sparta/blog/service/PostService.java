@@ -45,7 +45,7 @@ public class PostService {
     }
 
     public String deletePost(Long postID, User user) {
-        Post post = findPost(postID).removePost(user);
+        Post post = findPost(postID).checkDeleteablePost(user);
         postRepository.delete(post);
         return "삭제완료";
     }
