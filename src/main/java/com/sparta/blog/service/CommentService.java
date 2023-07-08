@@ -26,12 +26,12 @@ public class CommentService {
     }
 
     public CommentResponseDto updateComment(Long commentId, CommentRequestDto commentRequestDto, User user) {
-        Comment comment = findComment(commentId).authorizationUpdateComment(commentRequestDto, user);
+        Comment comment = findComment(commentId).checkChangeableComment(commentRequestDto, user);
         return new CommentResponseDto(comment);
     }
 
     public String deleteComment(Long commentId, User user) {
-        Comment comment = findComment(commentId).authorizationDeleteComment(user);
+        Comment comment = findComment(commentId).checkDeleteableComment(user);
         commentRepository.delete(comment);
         return "삭제완료";
     }
