@@ -1,6 +1,6 @@
 package com.sparta.blog.config;
 
-import com.sparta.blog.exceptions.JwtExceptionFilter;
+import com.sparta.blog.exception.JwtExceptionFilter;
 import com.sparta.blog.jwt.JwtAuthenticationFilter;
 import com.sparta.blog.jwt.JwtAuthorizationFilter;
 import com.sparta.blog.jwt.JwtUtil;

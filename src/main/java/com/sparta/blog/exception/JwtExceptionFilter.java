@@ -1,4 +1,4 @@
-package com.sparta.blog.exceptions;
+package com.sparta.blog.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;

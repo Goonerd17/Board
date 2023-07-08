@@ -1,4 +1,4 @@
-package com.sparta.blog.exceptions;
+package com.sparta.blog.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
