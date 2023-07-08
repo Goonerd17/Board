@@ -25,10 +25,7 @@ public class UserService {
         String username = signupRequestDto.getUsername();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
 
-        // 회원 중복 확인
         checkDuplicatedUsername(username);
-
-        // 사용자 ROLE 확인 (관리자인 경우, ADMIN / 사옹자인 경우, USER 부여)
         UserRoleEnum role = getUserRoleEnum(signupRequestDto);
 
         User user = new User(username, password, role);
@@ -37,6 +34,7 @@ public class UserService {
         return "회원가입 성공";
     }
 
+    // 회원 중복 확인
     private void checkDuplicatedUsername(String username) {
         Optional<User> found = userRepository.findByUsername(username);
         if (found.isPresent()) {
@@ -45,6 +43,7 @@ public class UserService {
         }
     }
 
+    // 사용자 ROLE 확인 (관리자인 경우, ADMIN / 사옹자인 경우, USER 부여)
     private UserRoleEnum getUserRoleEnum(SignupRequestDto signupRequestDto) {
         UserRoleEnum role = UserRoleEnum.USER;
         if (signupRequestDto.isAdmin()) {

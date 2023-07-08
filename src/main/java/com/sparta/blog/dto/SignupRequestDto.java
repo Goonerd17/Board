@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SignupRequestDto {
+
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     @Pattern(regexp = "^[a-z0-9]{4,10}$", message = "아이디에는 4~10자 영문 소문자, 숫자를 사용하세요. ")
     private String username;

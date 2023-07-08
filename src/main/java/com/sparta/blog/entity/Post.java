@@ -50,13 +50,13 @@ public class Post extends Timestamped {
         this.description = postRequestDto.getDescription();
     }
 
-    public Post checkChangeablePost(PostRequestDto postRequestDto, User user) {
+    public Post changePost(PostRequestDto postRequestDto, User user) {
         if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 게시글 작성자 혹은 관리자만 수정할 수 있습니다");
         this.update(postRequestDto);
         return this;
     }
 
-    public Post checkDeleteablePost(User user) {
+    public Post removePost(User user) {
         if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 게시글 작성자 혹은 관리자만 삭제할 수 있습니다");
         return this;
     }

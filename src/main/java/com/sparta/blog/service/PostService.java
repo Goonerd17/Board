@@ -40,12 +40,12 @@ public class PostService {
     }
 
     public PostResponseDto updatePost(Long postId, PostRequestDto postRequestDto, User user) {
-        Post post = findPost(postId).checkChangeablePost(postRequestDto, user);
+        Post post = findPost(postId).changePost(postRequestDto, user);
         return new PostResponseDto(post);
     }
 
     public String deletePost(Long postID, User user) {
-        Post post = findPost(postID).checkDeleteablePost(user);
+        Post post = findPost(postID).removePost(user);
         postRepository.delete(post);
         return "삭제완료";
     }
