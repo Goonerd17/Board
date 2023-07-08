@@ -1,6 +1,5 @@
-package com.sparta.blog.controller;
+package com.sparta.blog.exceptions;
 
-import com.sparta.blog.exceptions.ErrorReason;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.List;
 
 @ControllerAdvice
-public class ExceptionController {
+public class BlogExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorReason> handleIllegalArgsException(IllegalArgumentException ie) {
         ErrorReason errorReason = new ErrorReason(HttpStatus.BAD_REQUEST, "400", ie.getMessage());
