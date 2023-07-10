@@ -33,22 +33,11 @@ public class Comment extends Timestamped {
         this.user = user;
     }
 
-    private void update(CommentRequestDto commentRequestDto) {
+    public void update(CommentRequestDto commentRequestDto) {
         this.content = commentRequestDto.getContent();
     }
 
     protected void setPost(Post post) {
         this.post = post;
-    }
-
-    public Comment changeComment(CommentRequestDto commentRequestDto, User user) {
-        if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 댓글 작성자 혹은 관리자만 수정할 수 있습니다");
-        this.update(commentRequestDto);
-        return this;
-    }
-
-    public Comment checkDeleteableComment(User user) {
-        if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 댓글 작성자 혹은 관리자만 삭제할 수 있습니다");
-        return this;
     }
 }

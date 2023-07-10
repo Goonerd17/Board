@@ -27,12 +27,13 @@ public class CommentService {
     }
 
     public CommentResponseDto updateComment(Long commentId, CommentRequestDto commentRequestDto, User user) {
-        Comment comment = findComment(commentId).changeComment(commentRequestDto, user);
+        Comment comment = confirmComment(commentId,user);
+        comment.update(commentRequestDto);
         return new CommentResponseDto(comment);
     }
 
     public String deleteComment(Long commentId, User user) {
-        Comment comment = findComment(commentId).checkDeleteableComment(user);
+        Comment comment = confirmComment(commentId, user);
         commentRepository.delete(comment);
         return "삭제완료";
     }
@@ -47,5 +48,12 @@ public class CommentService {
     public Post findPost(Long postId) {
         return postRepository.findById(postId).orElseThrow(()->
                 new IllegalArgumentException("해당 게시글은 존재하지 않습니다"));
+    }
+
+    private Comment confirmComment(Long commentId, User user) {
+        Comment comment = findComment(commentId);
+        if (!(user.getId() == comment.getUser().getId() || user.getRole().getAuthority() == "ROLE_ADMIN"))
+            throw new IllegalArgumentException("해당 댓글 작성자 혹은 관리자만 수정,삭제할 수 있습니다");
+        return comment;
     }
 }
