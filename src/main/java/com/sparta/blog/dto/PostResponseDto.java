@@ -2,11 +2,13 @@ package com.sparta.blog.dto;
 
 import com.sparta.blog.entity.Post;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 @Getter
 public class PostResponseDto {
 

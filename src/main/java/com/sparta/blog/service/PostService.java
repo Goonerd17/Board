@@ -1,12 +1,13 @@
 package com.sparta.blog.service;
 
-import com.sparta.blog.dto.PostList;
+import com.sparta.blog.dto.ApiResponse;
 import com.sparta.blog.dto.PostRequestDto;
 import com.sparta.blog.dto.PostResponseDto;
 import com.sparta.blog.entity.Post;
 import com.sparta.blog.entity.User;
 import com.sparta.blog.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,11 +27,11 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public PostList getPosts() {
+    public List<PostResponseDto> getPosts() {
         List<PostResponseDto> collect = postRepository.findAllByOrderByCreatedAtAtDesc().stream()
                 .map(PostResponseDto::new)
                 .collect(Collectors.toList());
-        return new PostList(collect);
+        return collect;
     }
 
     @Transactional(readOnly = true)

@@ -22,23 +22,23 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
-    private final JwtUtil jwtUtil;
+    private final JwtProvider jwtProvider;
     private final UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
 
-        String tokenValue = jwtUtil.getTokenFromHeader(req);
+        String tokenValue = jwtProvider.getTokenFromHeader(req);
 
         if (StringUtils.hasText(tokenValue)) {
 
-            tokenValue =jwtUtil.substringHeaderToken(tokenValue);
+            tokenValue = jwtProvider.substringHeaderToken(tokenValue);
 
-            if (!jwtUtil.validateToken(tokenValue)) {
+            if (!jwtProvider.validateToken(tokenValue)) {
                 log.error("Token Error");
             }
 
-            Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
+            Claims info = jwtProvider.getUserInfoFromToken(tokenValue);
 
             try {
                 setAuthentication(info.getSubject());

@@ -2,9 +2,11 @@ package com.sparta.blog.dto;
 
 import com.sparta.blog.entity.Comment;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @Getter
 public class CommentResponseDto {
 

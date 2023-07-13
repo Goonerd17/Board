@@ -1,6 +1,8 @@
 package com.sparta.blog.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.blog.dto.ErrorResponse;
+import com.sparta.blog.utils.ResponseUtils;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
@@ -12,6 +14,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+
+import static com.sparta.blog.utils.ResponseUtils.*;
 
 public class JwtExceptionFilter extends OncePerRequestFilter {
     @Override
@@ -31,10 +35,9 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
         response.setStatus(errorCodeEnum.getStatus().value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
-        ErrorReason errorReason = new ErrorReason(errorCodeEnum);
 
         try {
-            response.getWriter().write(objectMapper.writeValueAsString(errorReason));
+            response.getWriter().write(objectMapper.writeValueAsString(error(errorCodeEnum.getMessage(), errorCodeEnum.getStatus().value())));
         } catch (IOException e) {
             e.printStackTrace();
         }
