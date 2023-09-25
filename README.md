@@ -21,7 +21,8 @@
 
 ### 3. 기술스택
 
-<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"> <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white"> <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=green"></br>
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"> <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white"> <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=green(https://img.shields.io/badge/https%3A%2F%2Fimg.shields.io%2Fbadge%2FSpring_Security-6DB33F
+)"></br>
 
 ### 4. 트러블 슈팅
 
@@ -36,7 +37,8 @@
 - 이러한 과정에서 필터에서 발생하는 예외는 Controller 계층으로 들어오기 전에 발생하는 예외이기 때문에 Spring Security 사용 시, 토큰에서 발생하는 예외는 @ControllerAdivce로 예외를 처리할 수 없음을 인지하였습니다.
 - 따라서 앞단에서 발생하는 예외들을 처리해주는 별도의 예외처리기가 필요하다고 생각하게 되었습니다.
 - OncePerRequestFilter를 상속받는 JwtExceptionFilter를 생성하여 토큰에서 발생할 수 있는 예외를 처리하였습니다
-- <img src='./src/main/resources/images/postman.png' width="100%">
+ <img src='./src/main/resources/images/postman.png' width="100%">
+
 
 
 ### 1-3) 최근 등록순으로 정렬해야하는 요구사항
@@ -46,6 +48,7 @@
 - 시간이 지난 후 다시 코드를 검토할 때, CommentList의 타입이 탐색, 조회에는 우수한 성능을 보이지만, 중간 데이터의 수정과 변경에는 비교적 느린 성능을 보이는 ArrayList이기 때문에 해당 부분을 sorted를 이용해 애플리케이션 차원에서 재정렬하는 것은 생각보다 많은 리소스 소모와 성능에서의 약점을 보일 수 있을 것 같다는 생각하게 되었습니다.
 - 따라서 DB에서 직접 역순정렬된 데이터를 가져오는 게 더 좋을 것 같다고 결론을 내리게 되었고, 해당 방식을 사용하였습니다.
 - 다만 두 가지 방식에서는 그렇게 크게 성능적 이점은 없기에 변경사항이 생기면 애플리케이션에서 로직을 빠르게 수정할 수 있도록 해주는 Comparable 방식도 나쁘지 않은 것 같다고 피드백을 받았습니다.
+
 
 
 ### 2) 고민
