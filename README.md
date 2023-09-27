@@ -68,8 +68,38 @@
 
 <details>
 <summary>2. 필터에서 발생하는 예외 </summary>
-- @ControllerAdvice를 적용하여 서비스 과정 중에 발생하는 예외들을 핸들링
-- 
+- 기존에는 @ControllerAdvice를 적용하여 서비스 과정 중에 발생하는 예외들을 핸들링
+- 토큰 유효성 검사 필터에서 발생하는 예외는 Contorller 계층으로 들어오기 전에 발생하므로 @ControllerAdivce로 처리할 수 없음을 인지
+- 따라서 별도의 예외처리기가 필요하다고 생각하였고, OncePerRequestFilter를 상속받는 JwtExceptionFilter를 생성하여 해당 예외들을 처리
+
+```java
+public class JwtExceptionFilter extends OncePerRequestFilter {
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+        try {
+            filterChain.doFilter(request, response);
+        } catch (ExpiredJwtException e) {
+            setErrorResponse(response, ErrorCodeEnum.TOKEN_EXPIRED);
+        } catch (JwtException | IllegalArgumentException | NullPointerException | UnsupportedEncodingException e) {
+            setErrorResponse(response, ErrorCodeEnum.TOKEN_INVALID);
+        }
+    }
+
+    private void setErrorResponse(HttpServletResponse response, ErrorCodeEnum errorCodeEnum) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.setStatus(errorCodeEnum.getStatus().value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+
+        try {
+            response.getWriter().write(objectMapper.writeValueAsString(error(errorCodeEnum.getMessage(), errorCodeEnum.getStatus().value())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 </details>  
 
 
