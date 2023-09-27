@@ -41,7 +41,7 @@
 
 ### 3 기술스택
 
-<img src="https://img.shields.io/badge/OpenJDK-232F3E?style=for-the-badge&logo=OpenJDK&logoColor=white"/> <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white"/> <img src="https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/> <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"/> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> <img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"/> <img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white"/>  
+<img src="https://img.shields.io/badge/OpenJDK-232F3E?style=for-the-badge&logo=OpenJDK&logoColor=white"/> <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white"/> <img src="https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/> <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"/> <img src="https://img.shields.io/badge/h2-4479A1?style=for-the-badge"/>  
 
 * * * 
 
@@ -56,20 +56,12 @@
 </details>
 
 <details>
-<summary><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> </summary>  
+<summary><img src="https://img.shields.io/badge/h2-4479A1?style=for-the-badge"/> </summary>  
 
     
-  - 기본적인 CRUD 기능과 유저 및 게시글 데이터를 처리하기에 용이한 것은 관계형 데이터베이스라고 생각했습니다.
+  - 스프링에 임베디드 데이터베이스 형태로 postman을 이용하여 기능들을 테스트할 때 용이할 것이라고 생각했습니다.
     
-  - 따라서 관계형 데이터베이스 중에서 가장 익숙하고, 오픈 소스이기 때문에 무료로 사용할 수 있는 MySQL을 선택했습니다.
-</details>
-
-<details>
-<summary><img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"/> <img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white"/> </summary>  
-  
-  - 가상 컴퓨터를 구매하여 FileZilla를 이용하여 쉽게 배포가 가능하고, 사용한 만큼 지불하는 방식이기 때문에 EC2를 선택했습니다.
-      
-  - MySQL을 AWS RDS에서 지원하기도 하고, DB 관리를 자동화해주기 때문에 편리성면에서 RDS를 선택했습니다.
+  - 다른 데이터베이스와 달리 매우 가볍고, 데이터의 변화 과정도 콘솔로 확인하기 쉬워 선택했습니다.
 </details>  
 
 * * *  
