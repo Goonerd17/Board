@@ -15,6 +15,7 @@
 
 [고민 점](#6-고민-점)  
 
+* * *  
 
 ### 1 프로젝트 개요  
 
@@ -34,7 +35,8 @@
 |회원가입,로그인|인증/인가, 유효성 검사|
 </details>
 
-  
+* * *  
+
 ### 3 기술스택
 
 <img src="https://img.shields.io/badge/OpenJDK-232F3E?style=for-the-badge&logo=OpenJDK&logoColor=white"/> <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white"/> <img src="https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/> <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"/> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> <img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"/> <img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white"/>  
@@ -65,6 +67,7 @@
   - MySQL을 AWS RDS에서 지원하기도 하고, DB 관리를 자동화해주기 때문에 편리성면에서 RDS를 선택
 </details>  
 
+* * *  
 
 ### 5 트러블 슈팅
 
@@ -115,5 +118,14 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
 ```
 </details>  
 
+<details>
+<summary>3. 정렬 요구사항 </summary>  
+  
+  - JWT토큰의 유효성 검사를 Service 계층에서 시행했을 때 해당 로직의 반복적으로 작성됨
+    
+  - 인증, 인가를 일괄적으로 처리해주는 Spring Security 사용하여 불필요한 코드 반복성 해결
+</details>
+
+* * *  
 
 ### 6 고민 점
