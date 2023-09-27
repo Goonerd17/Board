@@ -41,7 +41,7 @@
 
 ### 4  기술적 의사결정
 <details>
-<summary>1. <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white"/> <img src="https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/></summary>  
+<summary><img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"/> <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white"/> <img src="https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"/></summary>  
   
   - 다양한 라이브러리를 가지고 있는 자바 기반의 프레임워크
         
@@ -49,13 +49,14 @@
 </details>
 
 <details>
-<summary>2. <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> </summary>      
-  
+<summary><img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> </summary>  
+
+    
   - 관계형 데이터베이스들 중에서 가장 익숙하고, 오픈 소스이기 때문에 무료로 사용할 수 있기에 선택
 </details>
 
 <details>
-<summary>3. <img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"/> <img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white"/> </summary>  
+<summary><img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white"/> <img src="https://img.shields.io/badge/amazonrds-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white"/> </summary>  
   
   - 사용한 만큼 지불하는 방식이고, 가상 컴퓨터인 인스턴스를 완전하게 제어할 수 있으므로 EC2를 선택
       
