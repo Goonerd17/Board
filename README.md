@@ -49,7 +49,8 @@
 </details>
 
 <details>
-<summary>2. <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> </summary>  
+<summary>2. <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> </summary>    
+
   
   - 관계형 데이터베이스들 중에서 가장 익숙하고, 오픈 소스이기 때문에 무료로 사용할 수 있기에 선택
 </details>
