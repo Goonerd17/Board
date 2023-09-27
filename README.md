@@ -62,14 +62,17 @@
 
 <details>
 <summary>1. 토큰 유효성 검사, 불필요한 코드 반복성 </summary>
-- JWT토큰의 유효성 검사를 Service 계층에서 시행했을 때 해당 로직의 반복적으로 작성됨
+- JWT토큰의 유효성 검사를 Service 계층에서 시행했을 때 해당 로직의 반복적으로 작성됨  
+  
 - 인증, 인가를 일괄적으로 처리해주는 Spring Security 사용하여 불필요한 코드 반복성 해결
 </details>
 
 <details>
 <summary>2. 필터에서 발생하는 예외 </summary>
-- 기존에는 @ControllerAdvice를 적용하여 서비스 과정 중에 발생하는 예외들을 핸들링
-- 토큰 유효성 검사 필터에서 발생하는 예외는 Contorller 계층으로 들어오기 전에 발생하므로 @ControllerAdivce로 처리할 수 없음을 인지
+- 기존에는 @ControllerAdvice를 적용하여 서비스 과정 중에 발생하는 예외들을 핸들링  
+  
+- 토큰 유효성 검사 필터에서 발생하는 예외는 Contorller 계층으로 들어오기 전에 발생하므로 @ControllerAdivce로 처리할 수 없음을 인지  
+  
 - 따라서 별도의 예외처리기가 필요하다고 생각하였고, OncePerRequestFilter를 상속받는 JwtExceptionFilter를 생성하여 해당 예외들을 처리
 
 ```java
