@@ -150,3 +150,60 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 * * *  
 
 ### 6 고민 점
+
+<details>
+<summary>1. 비즈니스 로직의 위 </summary>  
+  
+  - Setter의 사용을 지양하면서, '도메인이 특정 조건에 따라 자신의 상태를 유연하게 변경하고 이를 통해 외부에서는 쉽게 도메인의 상태를 변경하지 못하도록 설계'하는 방식에 대해 고민했습니다.
+
+  - 객체지향을 공부하면서 가장 크게 재밌었던 점은 객체들은 다른 객체가 어떤 역할과 속성을 지니고 있는지 알지 못한 채, 자신에게 메세지가 온다면 그저 그 메세지를 수행할 뿐이라는 점에 집중하여 코드 리팩토링을 진행했습니다.
+
+  - 기존 Service 계층에서는 수정,삭제 과정에서 작성자 또는 관리자 권한 여부를 체크하는 조건문이 반복되었기 때문에 해당 반복성 문제를 해결하는 동시에 보다 객체지향적으로 설계하는 것을 목표로 했습니다.
+
+```java
+@Entity
+@Getter
+@NoArgsConstructor(access = PROTECTED)
+public class Post extends Timestamped {
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
+    private Long id;
+
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false)
+    private String username;
+
+    @Column(nullable = false)
+    private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> commentList = new ArrayList<>();
+
+    public void addComment(Comment comment) {
+        commentList.add(comment);
+        comment.setPost(this);
+    }
+
+    public Post(PostRequestDto postRequestDto, User user) {
+        this.title = postRequestDto.getTitle();
+        this.username = user.getUsername();
+        this.description = postRequestDto.getDescription();
+        this.user = user;
+    }
+
+    private void update(PostRequestDto postRequestDto) {
+        this.title = postRequestDto.getTitle();
+        this.description = postRequestDto.getDescription();
+    }
+
+    public Post changePost(PostRequestDto postRequestDto, User user) {
+        if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 게시글 작성자 혹은 관리자만 수정할 수 있습니다");
+        this.update(postR이 목표가 되었습니다.
+</details>
