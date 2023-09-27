@@ -152,7 +152,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 ### 6 고민 점
 
 <details>
-<summary>1. 비즈니스 로직의 위 </summary>  
+<summary>1. 비즈니스 로직의 위치치 </summary>  
   
   - Setter의 사용을 지양하면서, '도메인이 특정 조건에 따라 자신의 상태를 유연하게 변경하고 이를 통해 외부에서는 쉽게 도메인의 상태를 변경하지 못하도록 설계'하는 방식에 대해 고민했습니다.
 
@@ -205,5 +205,22 @@ public class Post extends Timestamped {
 
     public Post changePost(PostRequestDto postRequestDto, User user) {
         if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 게시글 작성자 혹은 관리자만 수정할 수 있습니다");
-        this.update(postR이 목표가 되었습니다.
+        this.update(postRequestDto);
+        return this;
+    }
+
+    public Post checkDeleteablePost(User user) {
+        if (user.getId() != this.getUser().getId() && user.getRole().getAuthority() == "ROLE_USER") throw new IllegalArgumentException("해당 게시글 작성자 혹은 관리자만 삭제할 수 있습니다");
+        return this;
+    }
+}
+```
+</details>
+
+<details>
+<summary>2. 프론트엔드 부재 </summary>  
+  
+  - SSR 방식의 페이지 렌더링도 고려해봤으나, 보다 CRUD 기능에 집중하면서 백엔드적인 측면에 집중하는 것이 중요하다고 생각하여 postman을 이용하는 방식을 채택했습니다.
+    
+  - 다음에는 프론트엔드 측과 협업을 통하여 실사용이 가능한 프로젝트를 해보고, 그 과정에서 협업에 중요한 소통능력을 발전시켜보는 것이 목표가 되었습니다.
 </details>
