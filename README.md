@@ -152,7 +152,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 ### 6 고민 점
 
 <details>
-<summary>1. 비즈니스 로직의 위치치 </summary>  
+<summary>1. 비즈니스 로직의 위치 </summary>  
   
   - Setter의 사용을 지양하면서, '도메인이 특정 조건에 따라 자신의 상태를 유연하게 변경하고 이를 통해 외부에서는 쉽게 도메인의 상태를 변경하지 못하도록 설계'하는 방식에 대해 고민했습니다.
 
